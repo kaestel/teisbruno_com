@@ -1,0 +1,199 @@
+* {font-family: Arial; line-height: 13px; color: #000000;}
+
+html {height: 100%;}
+body {height: 100%; background-color: #ffffff;
+	font-size: 12px;
+	background-color: #ffffff;
+	margin: 0;
+	padding: 0;
+}
+
+form, fieldset {margin: 0; padding: 0; border: 0;}
+img {border: 0;}
+
+/* SKIP NAVIGATION */
+.access {
+	width: 0 !important;
+	padding: 0 !important;
+}
+.access a {
+	display: block;
+	position: absolute;
+	top: -200px;
+	left: 0px;
+	width: 0px !important;
+	text-align: center;
+	background: #ffffff;
+	padding: 10px;
+	border: 1px solid #ff0000;
+	text-decoration: underline;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 26px;
+	font-stretch: condensed;
+}
+.access a:focus,
+.access a:active {
+	width: 97% !important;
+	top: 0px;
+	left: 0px;
+}
+.codeError {
+	display: none;
+}
+
+
+
+#page {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+#nav {
+	float: left;
+	height: 100%;
+	width: 260px;
+	position: relative;
+	overflow: hidden;
+	max-height: 915px;
+	
+}
+#nav ul {
+	width: 240px;
+	list-style: none;
+	padding: 0 0 0 20px;
+	overflow: hidden;
+	bottom: 20px;
+	left: 0px;
+	margin: 0;
+	position: absolute;
+}
+#nav ul ul {position: static; width: 220px;}
+
+#nav ul.menu {top: 14px;}
+#nav li {float: left;}
+#nav li span {display: none;}
+#nav .menu li {float: none;}
+
+#nav .frontpage {
+	text-indent: -1000px;
+	height: 99px;
+	display: block;
+	float: none;
+	padding: 0;
+	background: transparent url(/img/logo.png) no-repeat top left;
+}
+#nav .frontpage a {
+	height: 99px;
+	display: block;
+}
+#nav .contact {font-size: 12px; height: 126px; cursor: pointer; color: #888888 !important;}
+#nav .contact h3 {padding: 0; margin: 0; font-size: 12px; color: #888888 !important;}
+#nav .contact.open span a,
+#nav .contact.open span {display: block; font-size: 12px; color: #000000; line-height: 13px;}
+#nav .contact.open span span {display: inline;}
+#nav .tel {padding-top: 10px;}
+#nav .otliam a {font-weight: bold;}
+
+#nav .menu li.sel a,
+#nav li a:hover,
+#nav .menu li a:hover {
+	color: #b92fba;
+}
+#nav .menu li,
+#nav .menu li a {
+	color: #000000;
+}
+#nav .menu li a {
+	display: block;
+}
+#nav li,
+#nav li h3,
+#nav li a {
+	font-weight: normal;
+	font-size: 20px;
+	font-family: Arial;
+	line-height: 23px;
+	text-decoration: none;
+}
+#nav li a {cursor: pointer;}
+#nav li, #nav li a, #nav li.sel a, #nav .menu li.sel li a {color: #000000;}
+
+#content {
+	overflow: hidden;
+	height: 100%;
+}
+.carousel {
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+}
+.carousel p {height: 13px;}
+.carousel div.image {
+	padding-top: 20px;
+	height: 70%;
+	max-height: 700px;
+}
+.carousel img.image {
+	height: 100%;
+	max-height: 700px;
+}
+.carousel .images,
+.carousel .imageNav {
+	position: relative;
+	overflow: hidden;
+	height: 52px;
+}
+
+.carousel .images ul,
+.carousel .imageNav ul {
+	list-style: none;
+	position: relative;
+	height: 52px;
+	margin: 0;
+	padding: 0;
+}
+
+.carousel .images ul {}
+
+.carousel .images li {
+	position: absolute;
+	top: 0;
+}
+
+.carousel .images li,
+.carousel .imageNav li {
+	overflow: hidden;
+	float: left;
+}
+.carousel li a {
+	cursor: pointer;
+	position: relative;
+	display: block;
+}
+
+.carousel .imageNav {margin-right: 20px;}
+.carousel .imageNav li {height: 52px; opacity: 1; position: absolute;}
+.carousel .imageNav li.sel a {opacity: 1;}
+.carousel .imageNav li a img {height: 52px;}
+
+.carousel .imageNav li a {opacity: 0.5;}
+.carousel .imageNav li a:hover {opacity: 1;}
+
+.carousel .imageNav .a,
+.carousel .imageNav .b {
+	position: absolute;
+	top: 0;
+	width: 45px;
+	height: 52px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+}
+.carousel .imageNav .a.browse,
+.carousel .imageNav .b.browse {background-image: url(/img/bg_nav.png);}
+
+.carousel .imageNav .a {left: 0px; background-position: top left;}
+.carousel .imageNav .b {right: 0px; background-position: right bottom;}
+
+
+.layover {position: absolute; background-color: white; top: 0; left: 0; width: 100%; height: 100%; background-repeat: no-repeat; background-position: center center; z-index: 100; cursor: pointer;}
