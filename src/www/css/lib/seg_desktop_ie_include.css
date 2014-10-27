@@ -1,17 +1,8 @@
 @import url(/css/lib/s-fonts.css);
 @import url(/css/lib/desktop/s-page-desktop.css);
-@import url(/css/lib/desktop/s-content-desktop.css);
-@import url(/css/lib/desktop/s-footer-desktop.css);
 @import url(/css/lib/desktop/s-header-desktop.css);
-@import url(/css/lib/desktop/s-front-desktop.css);
-@import url(/css/lib/desktop/s-news-desktop.css);
-@import url(/css/lib/desktop/s-news_item-desktop.css);
-@import url(/css/lib/desktop/s-magazine-desktop.css);
-@import url(/css/lib/desktop/s-interviews-desktop.css);
-@import url(/css/lib/desktop/s-interview-desktop.css);
-@import url(/css/lib/desktop/s-field-desktop.css);
+@import url(/css/lib/desktop/s-content-desktop.css);
 
-@import url(/css/lib/desktop/s-article-desktop.css);
+@import url(/css/lib/desktop/s-hovers-desktop.css);
 
-@import url(/css/lib/desktop/s-mediaquery-desktop.css);
-
+@import url(/css/lib/desktop/s-content-desktop_ie.css);
