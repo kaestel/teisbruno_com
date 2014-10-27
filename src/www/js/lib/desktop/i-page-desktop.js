@@ -39,8 +39,16 @@ Util.Objects["page"] = new function() {
 
 		}
 
+		// global orientation change handler
 		page.orientationchanged = function(event) {
-			
+
+			u.rc(document.body, "landscape|portrait");
+			if(window.orientation == 90 || window.orientation == -90) {
+				u.ac(document.body, "landscape");
+			}
+			else {
+				u.ac(document.body, "portrait");
+			}
 
 		}
 
@@ -54,12 +62,17 @@ Util.Objects["page"] = new function() {
 				// page is ready
 				page.is_ready = true;
 
-				// set resize handler
-				u.e.addEvent(window, "resize", page.resized);
 				// set scroll handler
 				u.e.addEvent(window, "scroll", page.scrolled);
+
 				// set orientation change handler
-				u.e.addEvent(window, "orientationchange", page.orientationchanged);
+				if(u.e.event_pref == "touch") {
+					u.e.addEvent(window, "orientationchange", page.orientationchanged);
+				}
+				// set resize handler
+				else {
+					u.e.addEvent(window, "resize", page.resized);
+				}
 
 				u.navigation();
 

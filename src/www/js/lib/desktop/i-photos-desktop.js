@@ -1,7 +1,7 @@
 Util.Objects["photos"] = new function() {
 	this.init = function(scene) {
 
-		scene.bottom_offset = 174;
+		scene.bottom_offset = 172;
 
 
 		// resize handler 
