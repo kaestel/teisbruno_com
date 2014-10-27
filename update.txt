@@ -1,0 +1,17 @@
+Update apache conf
+
+Update config/config.php
+Update config/connect_db.php
+Add config/connect_mail.php
+
+Delete config/databases.php
+
+Update www/index
+
+# change DB name
+# update items table structure
+
+# sql: update items set itemtype = 'photo'
+
+# rename itemtype_photo -> item_photo
+# update item_photo table structure
