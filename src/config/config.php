@@ -19,7 +19,7 @@ define("SITE_EMAIL", "teis@teisbruno.com");
 /**
 * Optional constants
 */
-define("DEFAULT_PAGE_DESCRIPTION", "Geek peotry");
+define("DEFAULT_PAGE_DESCRIPTION", "Photographer Teis Bruno");
 define("DEFAULT_LANGUAGE_ISO", "DA"); // Regional language Danish
 define("DEFAULT_COUNTRY_ISO", "DK"); // Regional country Denmark
 
@@ -31,5 +31,5 @@ define("SITE_ITEMS", true);
 // Enable notifications (send collection email after N notifications)
 define("SITE_COLLECT_NOTIFICATIONS", 50);
 
-define("SITE_INSTALL", true);
+//define("SITE_INSTALL", true);
 ?>

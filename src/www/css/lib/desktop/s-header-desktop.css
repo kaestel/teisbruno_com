@@ -4,7 +4,7 @@
 
 #navigation {height: 100%; width: 220px;}
 #navigation ul {width: 200px; padding: 14px 0 0 20px;}
-#navigation li {display: block; font-size: 20px; line-height: 26px;}
+#navigation li {display: block; font-size: 18px; line-height: 26px;}
 #navigation li * {text-transform: uppercase;}
 #navigation li a {text-decoration: none;}
 

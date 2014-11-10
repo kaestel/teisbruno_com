@@ -1,6 +1,7 @@
 Util.Objects["photos"] = new function() {
 	this.init = function(scene) {
 
+		// make room for carousel
 		scene.bottom_offset = 172;
 
 
@@ -52,7 +53,7 @@ Util.Objects["photos"] = new function() {
 			u.ce(this.image);
 			this.image.clicked = function(event) {
 				u.e.kill(event);
-				
+
 				var x = u.eventX(event);
 				var img_x = u.absX(this);
 				var img_w = this.offsetWidth;
@@ -105,7 +106,13 @@ Util.Objects["photos"] = new function() {
 						this.scene.image_list_width = this.scene.image_list_width + this.image.offsetWidth;
 						u.as(this.scene.image_list, "width", this.scene.image_list_width + "px");
 
+						// update scroll settings
 						this.scene.setUpScroll();
+
+						this.image.transitioned = function() {
+							this.transitioned = null;
+							u.a.transition(this, "none");
+						}
 
 						// prepare to show image
 						u.a.transition(this.image, "none");
@@ -123,7 +130,7 @@ Util.Objects["photos"] = new function() {
 
 		}
 
-
+		// enable scrolling/swiping in carousel
 		scene.setUpScroll = function() {
 
 			// image list should be scrollable
@@ -250,8 +257,19 @@ Util.Objects["photos"] = new function() {
 			u.ac(this.next_node, "selected");
 
 			this.image.transitioned = function() {
+
+				this.transitioned = null;
+				u.a.transition(this, "none");
+
 				this.loaded = function(queue) {
 					this.src = queue[0].image.src;
+
+					this.transitioned = function() {
+						this.transitioned = null;
+						u.a.transition(this, "none");
+					}
+
+					u.a.transition(this, "all 0.3s ease-in-out");
 					u.a.setOpacity(this, 1);
 				}
 				u.preloader(this, ["/images/"+this.scene.item_id+"/"+this.scene.next_node.variant+"/x"+(this.scene.image_height - this.scene.image_height%100 + 100) + "." + this.scene.next_node.format]);
@@ -271,6 +289,7 @@ Util.Objects["photos"] = new function() {
 			this.updateCarouselButtonState();
 		}
 
+		// show next image, if next is available
 		scene.showNext = function() {
 			if(this.next_node) {
 				var next = u.ns(this.next_node);
@@ -284,6 +303,8 @@ Util.Objects["photos"] = new function() {
 				}
 			}
 		}
+
+		// show previous image, if previous is available
 		scene.showPrev = function() {
 			if(this.next_node) {
 				var prev = u.ps(this.next_node);
@@ -298,6 +319,7 @@ Util.Objects["photos"] = new function() {
 			}
 		}
 
+		// enable keyboard shortcuts
 		scene.keys = function(event) {
 			if(event.keyCode == 37) {
 

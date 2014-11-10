@@ -3,8 +3,8 @@
 
 
 /* FRONT */
-#content .scene.front {padding: 0; z-index: 90;}
-#content .scene.front .cover {margin: 20px; background-color: transparent; background-position: center center; background-repeat: no-repeat; background-size: 100% auto;}
+#content .scene.front {padding: 0;}
+#content .cover {z-index: 90; margin: 20px; position: absolute; left: 0; top: 0; width: 100%; background-color: transparent; background-position: center center; background-repeat: no-repeat; background-size: 100% auto;}
 
 
 /* PHOTOS */
@@ -23,7 +23,7 @@
 
 #content .scene.photos ul.images {font-size: 0; height: 52px;}
 #content .scene.photos ul.images li {display: inline-block; vertical-align: top; opacity: 0.5;}
-#content .scene.photos ul.images li.selected,
+#content .scene.photos ul.images li.selected {opacity: 1;}
 #content .scene.photos ul.images li a {display: none;}
 
 #content .scene.photos ul.images li img {opacity: 0; margin: 0; pointer-events: none;

@@ -76,7 +76,7 @@ class TypeFrontpage extends Model {
 
 
 	// custom function to add main media
-	// /admin/page/addMain/#item_id#
+	// /janitor/frontpage/addMain/#item_id#
 	function addMain($action) {
 
 		if(count($action) == 2) {
@@ -110,7 +110,7 @@ class TypeFrontpage extends Model {
 	}
 
 	// delete image - 3 parameters exactly
-	// /admin/log/deleteImage/#item_id#/#variant#
+	// /janitor/frontpage/deleteImage/#item_id#/#variant#
 	function deleteMedia($action) {
 
 		if(count($action) == 3) {

@@ -1,53 +1,67 @@
 u.bug_console_only = true;
+u.bug_force = true;
 
 Util.Objects["page"] = new function() {
 	this.init = function(page) {
-		
-		//if(u.hc(page, "i:page")) {
-			
+
+		if(u.hc(page, "i:page")) {
+
+			u.rc(page, "i:page");
+
 			// header reference
 			page.hN = u.qs("#header");
-			page.hN.service = u.qs(".servicenavigation", page.hN);
+			page.hN = u.ae(page.parentNode, page.hN);
 
 			// content reference
-			page.cN = u.qs("#content", page);
+			page.cN = u.qs("#content");
 
 			// navigation reference
-			page.nN = u.qs("#navigation", page);
-			// move navigation to header
-			page.nN = u.ae(page.hN, page.nN);
+			page.nN = u.qs("#navigation");
+			page.nN = u.ae(page.parentNode, page.nN);
 
 			// footer reference
 			page.fN = u.qs("#footer");
-			
-			
+
+			// initial scene setup
+			page.scene = u.qs(".scene", page.cN);
+
+			// disable dragging page
+			u.e.drag(page.hN, page.hN);
+
 
 			// global resize handler 
 			page.resized = function() {
-				//u.bug("page.resized");
-				// forward resize event to current scene
+
+				// update content height
+				u.as(page.cN, "height", (page.offsetHeight - page.hN.offsetHeight)+"px");
+
+
+				// TODO: update drag coords
+
 				if(page.cN && page.cN.scene && typeof(page.cN.scene.resized) == "function") {
 					page.cN.scene.resized();
 				}
 
 			}
 
+
 			// global scroll handler 
 			page.scrolled = function() {
 
-				// forward scroll event to current scene
 				if(page.cN && page.cN.scene && typeof(page.cN.scene.scrolled) == "function") {
 					page.cN.scene.scrolled();
 				}
 
 			}
 
+			// handle orientation change
 			page.orientationchanged = function(event) {
-				
+
 				u.rc(document.body, "landscape|portrait");
-				if (this.orientation == 90 || this.orientation == -90) {
+				if(window.orientation == 90 || window.orientation == -90) {
 					u.ac(document.body, "landscape");
-				} else {
+				}
+				else {
 					u.ac(document.body, "portrait");
 				}
 
@@ -55,237 +69,271 @@ Util.Objects["page"] = new function() {
 
 			// Page is ready - called from several places, evaluates when page is ready to be shown
 			page.ready = function() {
-//				u.bug("page ready")
+//				u.bug("page.ready")
 
 				// page is ready to be shown - only initalize if not already shown
-				if(!u.hc(this, "ready")) {
+				if(!this.is_ready) {
+
+					window.scrollTo(0, 0);
+
 
 					// page is ready
-					u.addClass(this, "ready");
+					this.is_ready = true;
+
+					// add logo
+					this._logo = u.ie(page.hN, "a", {"class":"logo"})
+
+					// make logo clickable
+					this._logo.clicked = function(event) {
+						location.href = "/";
+					}
+
+					// u.bug(this._logo);
+					u.e.click(this._logo);
 
 					// set resize handler
-					u.e.addEvent(window, "resize", page.resized);
+					if(u.e.event_pref != "touch") {
+						u.e.addEvent(window, "resize", page.resized);
+					}
 					// set scroll handler
 					u.e.addEvent(window, "scroll", page.scrolled);
 					// set orientation change handler
 					u.e.addEvent(window, "orientationchange", page.orientationchanged);
 
-					this.initNavigation();
-					this.initFooter();
 
-					// show scene
-					page.cN.scene = u.qs(".scene", this);
+					// create scene reference
+					page.cN.scene = u.qs(".scene", page);
 
-					// load random 1/5 img
-					// var nr = u.random(1, 5);
-					//u.as(page, "background-image", "url(/img/bg_page"+nr+".jpg)");
-					
+					// initialize header
+					page.initHeader();
+
+					// initialize navigation
+					page.initNavigation();
+
+					// set content height
+					u.as(page.cN, "height", (page.offsetHeight - page.hN.offsetHeight)+"px");
+
+					// enable ajax navigation
+					u.navigation();
+				}
+			}
+
+			// page content is ready to be shown
+			page.cN.ready = function() {
+//				u.bug("page.cN.ready")
+
+				if(!page.cN.is_ready) {
+					u.a.transition(page.hN, "all 0.5s ease-in-out");
+					u.a.setOpacity(page.hN, 1);
+
+					page.cN.is_ready = true;
+				}
+			}
+
+			// reverse ready state
+			page.cN.unready = function() {
+//				u.bug("page.cN.unready")
+
+				if(page.cN.is_ready) {
+					u.a.transition(page.hN, "all 0.5s ease-in-out");
+					u.a.setOpacity(page.hN, 0);
+
+					page.cN.is_ready = false;
 				}
 			}
 
 
-			// initialize navigation elements
-			page.initNavigation = function() {
+			// navigation order, prepare for loading
+			page.cN.navigate = function(url) {
+				u.bug("page.cN.navigate:" + url)
 
-				// add menu logo
-				this.logo = u.ie(page.hN, "div", ({"class": "logo"}));
-				this.logo.clicked =function() {
-					window.location.href = "/";
+				var scene = u.qs(".scene", page.cN);
+
+				// close menu if it is open
+				if(page.nN.is_open) {
+					page.bn_nav.clicked();
 				}
-				u.ce(this.logo);
 
-				// add shadow - behind "fake" nav
-				var shadow = u.ie(this.hN, "div", {"class": "shadow"});
-				u.a.setOpacity(shadow, "0");
-				u.as(shadow, "display", "none");
 
-				// add "fake" nav - holds menu icon + li.sected
-				var nav = u.ie(page.hN, "ul", ({"class": "nav"}));
-				u.ae(nav, "li", ({"class": "menu", "html": "<p>Menu</p>"}));
-				if (u.hc(document.body, "front")) {
-					u.as(page, "backgroundImage", "url(/img/bg_page1.jpg)");
-					u.as(nav, "top", window.innerHeight-50 +"px");
+				page.cN.next_url = url;
+
+				// remove existing scene first
+				if(scene) {
+					scene.transitioned = function() {
+						this.parentNode.removeChild(this);
+
+						page.cN.loadContent();
+					}
+					u.a.transition(scene, "all 0.5s ease-in-out");
+					u.a.setOpacity(scene, 0);
 				}
-				
-				shadow.clicked = function() {
-					nav.clicked();
+				else {
+					page.cN.loadContent();
 				}
-				nav.clicked = function() {
-					// shadow - display none
-					shadow.transitioned = function() {
-						u.a.transition(shadow, "none");
-						if (u.gcs(shadow, "opacity") == "0") {
-							u.as(shadow, "display", "none");
-						}
-					}
+			}
 
-					// Open
-					page.nN.transitioned = function() {
-						u.a.transition(this, "none");
-						u.e.drag(this, [0, window.innerHeight-this.offsetHeight, this.offsetWidth, this.offsetHeight], {"strict":false, "elastica":200});
+			// load content
+			page.cN.loadContent = function() {
+
+				this.response = function(response) {
+
+					var scene = u.qs(".scene", response);
+					u.ae(this, scene);
+					u.init(this);
+
+					page.setNavigationState();
+				}
+				u.request(this, this.next_url);
+			}
+
+
+			// init header
+			page.initHeader = function() {
+
+
+				this.bn_nav = u.qs(".servicenavigation li.navigation", this.hN);
+				u.ae(this.bn_nav, "div");
+				u.ae(this.bn_nav, "div");
+				u.ae(this.bn_nav, "div");
+
+				u.ce(this.bn_nav);
+				this.bn_nav.clicked = function(event) {
+
+					u.e.kill(event);
+
+					if(!page.nN.is_open) {
+
+						u.a.transition(page.nN, "all 0.5s ease-in-out");
+						u.a.translate(page.nN, 0, 0);
+
+						page.nN.is_open = true;
+						u.ac(this, "open");
 					}
-					
-					// open
-					if (!this.open) {
-						this.open = true;
-						u.a.transition(page.nN, "all 0.5s ease-out");
-						u.as(page.nN, "left", "0px");
-						u.as(shadow, "display", "block");
-						u.a.transition(shadow, "all 0.5s ease-out");
-						u.a.setOpacity(shadow, "1");
-					}
-					// Close
 					else {
-						this.open = false;
-						u.a.transition(page.nN, "all 0.3s ease-in");
-						u.as(page.nN, "left", "-280px");
-						u.a.transition(shadow, "all 0.3s ease-in");
-						u.a.setOpacity(shadow, "0");
+
+						u.a.transition(page.nN, "all 0.3s ease-in-out");
+						u.a.translate(page.nN, 0, -page.nN.offsetHeight);
+
+						page.nN.is_open = false;
+						u.rc(this, "open");
 					}
-					
-				}
-				u.ce(nav);
-				u.ce(shadow);
-
-
-				// move li children from .member & kill it
-				var ul = u.qs("ul.navigation", this.nN);
-				var level0 = u.qsa("li.indent0", ul);
-				var sib = u.qs("li.interview", ul);
-				var kill = u.qs("li.member", ul);
-				ul.removeChild(kill);
-				var li_height = 64;
-				var node, i, j, li, sub_li;;
-				for (i = 0; node = level0[i]; i++) {
-					//u.ae(this.nN, node);
-					ul.insertBefore(node, sib	);
 				}
 
-				// loop and fold sub navigation
-				for (i = 0; li = level0[i]; i++) {
-					
-					// loop and fold second level first
-					var level1 = u.qsa("li.indent1", li);
-					for (j = 0; sub_li = level1[j]; j++) {
-						if (!u.hc(sub_li, "selected")) {
-							if (!u.hc(sub_li, "path")) {
-								u.as(sub_li, "height", li_height+"px");
+			}
+
+
+			// Init navigation
+			page.initNavigation = function() {
+	//			u.bug("initNavigation");
+
+				// append servicenavigation nodes to navigation
+				var list = u.qs("ul", page.nN);
+				page.nodes = u.cn(list);
+				page.first_nav_link = false;
+
+				var i, node;
+				for(i = 0; node = page.nodes[i]; i++) {
+
+					// Front
+					if(u.hc(node, "front")) {
+						// maintain oldschool link for hard reloads
+
+						// move to end of list
+						u.ae(list, node);
+					}
+
+					// Contact
+					else if(u.hc(node, "contact")) {
+
+						node.ul = u.qs("ul", node);
+
+						u.a.setOpacity(node.ul, 0);
+						u.as(node.ul, "display", "block");
+						node.ul.org_height = node.ul.offsetHeight;
+						u.as(node.ul, "height", 0);
+
+						u.e.click(node);
+						node.clicked = function() {
+							if(this.is_open) {
+
+								// update drag coords
+								this.ul.transitioned = function() {
+									page.nN.start_drag_y = window.innerHeight - page.nN.offsetHeight;
+									page.nN.end_drag_y = page.nN.offsetHeight;
+								}
+
+								u.a.transition(this.ul, "all 0.5s ease-in-out");
+								u.a.setHeight(this.ul, 0);
+								u.a.setOpacity(this.ul, 0);
+
+								this.is_open = false;
+							}
+							else {
+
+								// update drag coords
+								this.ul.transitioned = function() {
+									page.nN.start_drag_y = window.innerHeight - page.nN.offsetHeight;
+									page.nN.end_drag_y = page.nN.offsetHeight;
+								}
+
+								u.a.transition(this.ul, "all 0.5s ease-in-out");
+								u.a.setHeight(this.ul, this.ul.org_height);
+								u.a.setOpacity(this.ul, 1);
+
+								this.is_open = true;
 							}
 						}
 					}
 
-					// click sublevel groups
-					li.h4 = u.qs("h4", li);
-					li.h4.node = li;
-					li.h4.clicked = function(event) {
-
-						this.node.transitioned = function() {
-							u.a.transition(this, "none");
-							u.e.drag(page.nN, [0, window.innerHeight-page.nN.offsetHeight, page.nN.offsetWidth, page.nN.offsetHeight], {"strict":false, "elastica":200});
-						}
-						// FOLD
-						if (this.open) {
-							this.open = false;
-							u.a.transition(this.node, "all 0.4s ease-out");
-							u.a.setHeight(this.node, li_height);
-						}
-						// OPEN
-						else {
-							this.open = true;
-							u.a.transition(this.node, "all 0.4s ease-in");
-							u.a.setHeight(this.node, this.node.org_height)
-						}
-					}
-					u.ce(li.h4);
-
-
-					// Store height after folding second level.
-					li.org_height = li.offsetHeight;
-
-
-					// LEVEL 1 - FOUND PATH
-					if (u.hc(li, "path")) {
-						li.h4.open = true;
-					}
-					// NOT ACTIVE - FOLD
+					// Any other link
 					else {
-						li.h4.open = false;
-						u.as(li, "height", li_height+"px");
+
+						// remember first nav link (to show after frontpage)
+						if(!page.first_nav_link) {
+							page.first_nav_link = node;
+						}
+
+						u.ce(node, {"type":"link"});
 					}
 				}
-				
 
-				// add selected class - add li.selected to "fake" nav
-				var nav_list = u.qsa("li", ul);
-				for (i = 0; node = nav_list[i]; i++) {
-					
-					// find current page -> navigation relation
-					if(u.hc(document.body, node.className) || u.hc(node, "selected")) {
-						
-						this.active_menu = node;
+
+				// position navigation
+				u.a.transition(page.nN, "none");
+				u.as(page.nN, "display", "block");
+				u.a.translate(page.nN, 0, -page.nN.offsetHeight);
+
+				// allow dragging
+				u.e.drag(this.nN, [0, window.innerHeight - this.nN.offsetHeight, this.hN.offsetWidth, this.nN.offsetHeight], {"strict":false, "elastica":200, "vertical_lock":true});
+
+			}
+
+			// apply selected class to navigation
+			page.setNavigationState = function() {
+
+				var i, node;
+				for(i = 0; node = page.nodes[i]; i++) {
+					if(node.url && node.url == location.href) {
 						u.ac(node, "selected");
-
-						// add active menu node to dummy menu
-						var clone = node.cloneNode(true);
-						u.ie(nav, clone);
-
 					}
-					
-					// not current - remove class
 					else {
-						if (u.hc(node, "selected")) {
-							u.rc(node, "selected");
-						}
+						u.rc(node, "selected");
 					}
 				}
-
-
-
 			}
 
-
-			// initialize navigation elements
-			page.initFooter = function() {
-
-				var sponsor = u.qs(".sponsors", page.fN)
-				var sponsor_h5 = u.qs("h5", sponsor);
-				var sponsor_ul = u.qs("ul", sponsor);
-				sponsor_ul.org_height = sponsor_ul.offsetHeight;
-				u.as(sponsor_ul, "height", "0px");
-
-				sponsor_ul.transitioned = function() {
-					u.a.transition(this, "none");
-				}
-
-				sponsor_h5.clicked = function(event) {
-					u.a.transition(sponsor_ul, "all 0.4s ease-out");
-
-					if (!this.open) {
-						this.open = true;
-						u.as(sponsor_ul, "height", sponsor_ul.org_height+"px");
-					}
-					// close
-					else {
-						this.open = false;
-						u.as(sponsor_ul, "height", "0px");
-					}
-				}
-				u.ce(sponsor_h5);
-			}
-
-			// ready to start page builing process
 			page.ready();
 
+		}
 
-		//}
 	}
 }
 
-u.e.addDOMReadyEvent(u.init);
+// Controlled initialization
+function static_init() {
+	u.o.page.init(u.qs("#page"));
+}
 
+u.e.addDOMReadyEvent(static_init);
 
-
-
-
-
-
+// u.e.addDOMReadyEvent(u.init);

@@ -6,12 +6,30 @@ Add config/connect_mail.php
 
 Delete config/databases.php
 
-Update www/index
+Add ignore file
+
+Run GIT cleanup commands
+
+Update templates, controllers, js og css
+
 
 # change DB name
-# update items table structure
+# update items table structure (remove itemtype_id, add itemtype, add modified_at, add published_at, move user_id, rename timestamp to created_at)
 
 # sql: update items set itemtype = 'photo'
 
-# rename itemtype_photo -> item_photo
-# update item_photo table structure
+# delete user tables
+# Run setup script to add new users
+
+# run quickfix script
+
+# delete basic tables + itemtype_photo + item_tags + navigation + navigation_items + item_descriptions
+
+hertil
+
+# create teis user + user_group
+# update user_id on items
+
+# run quickfix-access
+
+# update access grants
