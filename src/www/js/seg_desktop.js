@@ -3336,9 +3336,7 @@ Util.wrapContent = u.wc = function(node, node_type, attributes) {
 		return wrapper_node;
 	}
 	catch(exception) {
-		u.bug("Exception ("+exception+") in u.wc, called from: "+arguments.callee.caller);
-		u.bug("node:" + u.nodeId(node, 1));
-		u.xInObject(attributes);
+		u.exception("u.wc", arguments.callee.caller, exception, {"node":node, "node_type":node_type, "attributes":attributes})
 	}
 	return false;
 }
@@ -3398,7 +3396,6 @@ Util.classVar = u.cv = function(node, var_name) {
 	}
 	return false;
 }
-u.getIJ = u.cv;
 Util.setClass = u.sc = function(node, classname) {
 	try {
 		var old_class = node.className;
@@ -3421,7 +3418,7 @@ Util.hasClass = u.hc = function(node, classname) {
 		}
 	}
 	catch(exception) {
-		u.bug("Exception ("+exception+") in u.hasClass("+u.nodeId(node)+"), called from: "+arguments.callee.caller);
+		u.bug("Exception ("+exception+") in u.hasClass("+u.nodeId(node)+", "+classname+"), called from: "+arguments.callee.caller);
 	}
 	return false;
 }
