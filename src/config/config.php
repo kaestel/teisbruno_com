@@ -13,15 +13,15 @@ error_reporting(E_ALL);
 */
 define("SITE_UID", "TBC");
 define("SITE_NAME", "teisbruno.com");
-define("SITE_URL", "teisbruno.com");
+define("SITE_URL", (isset($_SERVER["HTTPS"]) ? "https" : "http")."://".$_SERVER["SERVER_NAME"]);
 define("SITE_EMAIL", "teis@teisbruno.com");
 
 /**
 * Optional constants
 */
 define("DEFAULT_PAGE_DESCRIPTION", "Photographer Teis Bruno");
-define("DEFAULT_LANGUAGE_ISO", "DA"); // Regional language Danish
-define("DEFAULT_COUNTRY_ISO", "DK"); // Regional country Denmark
+define("DEFAULT_LANGUAGE_ISO", "EN");
+define("DEFAULT_COUNTRY_ISO", "DK");
 
 
 // Enable items model

@@ -17,7 +17,6 @@ $page->pageTitle("Login");
 $page->page(array(
 	"type" => "login",
 	"templates" => "pages/login.php"
-	)
-);
+));
 
 ?>

@@ -1,5 +1,5 @@
 <?
-$IC = new Item();
+$IC = new Items();
 $collections = $IC->getItems(array("itemtype" => "photocollection", "status" => 1, "order" => "position"));
 ?>
 	</div>

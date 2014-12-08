@@ -2,8 +2,8 @@
 global $IC;
 global $action;
 
-$item = $IC->getCompleteItem(array("sindex" => $action[0]));
-$item_id = $item["item_id"];
+$item_id = $action[0];
+$item = $IC->getItem(array("sindex" => $item_id, "extend" => array("mediae" => true)));
 ?>
 <div class="scene photos i:photos item_id:<?= $item["item_id"] ?>">
 
