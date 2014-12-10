@@ -14,7 +14,7 @@ error_reporting(E_ALL);
 define("SITE_UID", "TBC");
 define("SITE_NAME", "teisbruno.com");
 define("SITE_URL", (isset($_SERVER["HTTPS"]) ? "https" : "http")."://".$_SERVER["SERVER_NAME"]);
-define("SITE_EMAIL", "teis@teisbruno.com");
+define("SITE_EMAIL", "mail@teisbruno.com");
 
 /**
 * Optional constants
