@@ -1,11 +1,13 @@
-* {color: #000000;
+* {
+/*	color: #000000;*/
+	color: #ffffff;
 	font-family: Arial, sans-serif;
 	-webkit-text-size-adjust: none;
 	-webkit-font-smoothing: antialiased;
 }
 
 html {height: 100%;}
-body {height: 100%; background-color: #ffffff; margin: 0;}
+body {height: 100%; background-color: #000000; /*background-color: #ffffff;*/ margin: 0;}
 
 
 /* BASE */

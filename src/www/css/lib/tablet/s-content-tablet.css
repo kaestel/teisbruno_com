@@ -2,5 +2,5 @@ a:active {text-decoration: none;}
 
 #navigation li a:active {color: #b92fba;}
 
-body.portrait {background: #ffffff url(/img/logo_rotate.png) no-repeat center center;}
+body.portrait {background: #000000 url(/img/logo_black_rotate.png) no-repeat center center;}
 body.portrait #page {display: none;}

@@ -1,9 +1,9 @@
-#header {z-index: 50; position: absolute; top: 0; left: 0; height: 50px; width: 100%; opacity: 0; background: #ffffff;
+#header {z-index: 50; position: absolute; top: 0; left: 0; height: 50px; width: 100%; opacity: 0; background: #000000;
 	-webkit-transform: translate3d(0,0,0);
 }
 
 #header a.logo {z-index: 10; position: absolute; left: 0; top: 0; width: 50px; height: 50px;
-	background: transparent url(/img/logo_mobile_touch.png) no-repeat center top;
+	background: transparent url(/img/logo_black_mobile_touch.png) no-repeat center top;
 }
 
 #header .servicenavigation {position: absolute; top: 0; left: 0; z-index: 9; width: 100%; height: 60px;}
@@ -16,7 +16,7 @@
 #header .servicenavigation li.admin {display: none;}
 
 
-#navigation {z-index: 6; min-height: 100%; width: 100%; position: absolute; top: 0; left: 0; background-color: #ffffff;
+#navigation {z-index: 6; min-height: 100%; width: 100%; position: absolute; top: 0; left: 0; background-color: #000000;
 	user-select: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -31,7 +31,7 @@
 
 
 #navigation li.front {margin: 15px 0 0; height: 99px; padding: 15px 0 0; border-top: 1px solid #bbbbbb;} 
-#navigation li.front a {text-indent: -1000px; height: 99px; display: block; background: transparent url(/img/logo.png) no-repeat top center;}
+#navigation li.front a {text-indent: -1000px; height: 99px; display: block; background: transparent url(/img/logo_black.png) no-repeat top center;}
 
 
 #navigation li.contact {padding: 10px 0 10px; border-bottom: 1px solid #bbbbbb; margin: 0 0 15px;}

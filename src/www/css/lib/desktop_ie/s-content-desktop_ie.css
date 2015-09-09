@@ -21,7 +21,7 @@
 #content .scene.photos div.carousel {overflow: hidden; position: relative; height: 52px;}
 #content .scene.photos div.carousel div.left,
 #content .scene.photos div.carousel div.right {position: absolute; top: 0; width: 45px; height: 52px; background-color: transparent; background-repeat: no-repeat;
-	background-image: url(/img/bg_nav.png);
+	background-image: url(/img/bg_black_nav.png);
 }
 #content .scene.photos div.carousel div.left {left: 0px; background-position: top left;}
 #content .scene.photos div.carousel div.right {right: 0px; background-position: right bottom;}
