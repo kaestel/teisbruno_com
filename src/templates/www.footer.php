@@ -12,8 +12,8 @@ $collections = $IC->getItems(array("itemtype" => "photocollection", "status" => 
 				<ul itemscope itemtype="http://schema.org/PostalAddress">
 					<li class="name" itemprop="name">Teis Bruno</li>
 					<li class="role" itemprop="role">Photographer</li>
-					<li class="street" itemprop="streetAddress">N&oslash;rrebrogade 7A</li>
-					<li class="postalcity"><span itemprop="postalCode">2200</span> <span itemprop="addressLocality">Copenhagen N</span></li>
+					<li class="street" itemprop="streetAddress">Chr. Richardts Vej 8, 1.sal</li>
+					<li class="postalcity"><span itemprop="postalCode">1951</span> <span itemprop="addressLocality">Frederiksberg C</span></li>
 					<li class="phone" itemprop="telephone">+45 4019 2919</li>
 					<li class="email" itemprop="email"><a href="mailto:mail@teisbruno.com">mail@teisbruno.com</a></li>
 				</ul>
