@@ -31,9 +31,9 @@ class TypeFrontpage extends Itemtype {
 		$this->addToModel("main", array(
 			"type" => "files",
 			"label" => "Drag image here",
-			"allowed_sizes" => "1600x900",
+//			"allowed_sizes" => "1600x900",
 			"allowed_formats" => "png,jpg",
-			"hint_message" => "Add image here. Use png or jpg in 1600x900.",
+			"hint_message" => "Add image here. Use png or jpg.",
 			"error_message" => "Media does not fit requirements."
 		));
 
