@@ -10,4 +10,4 @@ else {
 	$item = false;
 }
 ?>
-<div class="scene front i:front<?= $item ? " item_id:".$item["id"]." format:".$item["mediae"]["main"]["format"] : "" ?>"></div>
+<div class="scene front i:front<?= $item ? " item_id:".$item["id"]." format:".$item["mediae"]["main"]["format"]. " width:".$item["mediae"]["main"]["width"]. " height:".$item["mediae"]["main"]["height"] : "" ?>"></div>

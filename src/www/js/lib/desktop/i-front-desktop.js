@@ -25,14 +25,21 @@ Util.Objects["front"] = new function() {
 			page.cN.unready();
 
 
-			item_id = u.cv(this, "item_id");
-			format = u.cv(this, "format");
+			var item_id = u.cv(this, "item_id");
+			var format = u.cv(this, "format");
+			var width = u.cv(this, "width");
+			var height = u.cv(this, "height");
 
 			// load cover
 			if(item_id) {
 				this.cover = u.ae(page.cN, "div", {"class":"cover"});
 				u.as(this.cover, "height", page.offsetHeight-40+"px");
-				u.as(this.cover, "backgroundImage", "url(/images/"+item_id+"/main/1600x."+format+")");
+				if(width > height) {
+					u.as(this.cover, "backgroundImage", "url(/images/"+item_id+"/main/1200x."+format+")");
+				}
+				else {
+					u.as(this.cover, "backgroundImage", "url(/images/"+item_id+"/main/x800."+format+")");
+				}
 
 				u.e.click(this.cover);
 				this.cover.clicked = function(event) {

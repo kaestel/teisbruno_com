@@ -10,6 +10,7 @@
 #content .defaultEdit div.main_media form.upload label {margin-top: 82px;}
 #content .defaultEdit div.main_media img {height: 216px;}
 
+#content .defaultEdit div.single_media img {width: auto !important;}
 
 /* NAVIGATION */
 body.frontpage #navigation .frontpage a,

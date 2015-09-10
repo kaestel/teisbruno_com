@@ -4,7 +4,7 @@
 
 /* FRONT */
 #content .scene.front {padding: 0;}
-#content .cover {z-index: 90; margin: 20px; position: absolute; left: 0; top: 0; width: calc(100% - 40px); background-color: transparent; background-position: center center; background-repeat: no-repeat; background-size: 100% auto;}
+#content .cover {z-index: 90; margin: 20px; position: absolute; left: 0; top: 0; width: calc(100% - 40px); background-color: transparent; background-position: center center; background-repeat: no-repeat; background-size: contain;}
 
 
 /* PHOTOS */

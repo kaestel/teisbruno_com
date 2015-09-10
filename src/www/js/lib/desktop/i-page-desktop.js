@@ -136,8 +136,13 @@ Util.Objects["page"] = new function() {
 
 						page.cN.loadContent();
 					}
-					u.a.transition(scene, "all 0.5s ease-in-out");
-					u.a.setOpacity(scene, 0);
+					if(u.gcs(scene, "opacity") != 0) {
+						u.a.transition(scene, "all 0.5s ease-in-out");
+						u.a.setOpacity(scene, 0);
+					}
+					else {
+						scene.transitioned();
+					}
 				}
 				else {
 					page.cN.loadContent();
