@@ -1,5 +1,5 @@
 /* FRONTPAGES */
-#content .frontpageList ul.items > li {min-height: 90px; padding-left: 160px;}
+#content .frontpageList ul.items > li {min-height: 90px; padding-left: 160px; background-size: auto 100%;}
 
 /* PHOTOCOLLECTIONS */
 #content .photocollectionList ul.items > li h3 {padding: 16px 30px;}
