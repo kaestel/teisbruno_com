@@ -95,6 +95,7 @@ Util.Objects["photos"] = new function() {
 
 					u.ce(node);
 					node.clicked = function() {
+						alert("fisk")
 						this.scene.showImage(this);
 					}
 

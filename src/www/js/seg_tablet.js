@@ -5335,6 +5335,7 @@ Util.Objects["photos"] = new function() {
 					node.scene = this;
 					u.ce(node);
 					node.clicked = function() {
+						alert("fisk")
 						this.scene.showImage(this);
 					}
 					node.loaded = function(queue) {
