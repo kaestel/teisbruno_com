@@ -5309,6 +5309,7 @@ Util.Objects["photos"] = new function() {
 			u.ce(this.image);
 			this.image.clicked = function(event) {
 				u.e.kill(event);
+				u.bug("event");
 				u.xInObject(event);
 				var x = u.eventX(event);
 				var img_x = u.absX(this);
