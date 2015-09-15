@@ -5754,7 +5754,6 @@ Util.Objects["photos"] = new function() {
 			this.image_mask.scene = this;
 			u.ce(this.image_mask);
 			this.image_mask.clicked = function(event) {
-					alert("fask")
 				this.scene.showNext();
 			}
 			this.image = u.ae(this.image_mask, "img", {"class":"image"});
@@ -5762,15 +5761,14 @@ Util.Objects["photos"] = new function() {
 			u.ce(this.image);
 			this.image.clicked = function(event) {
 				u.e.kill(event);
+				u.xInObject(event);
 				var x = u.eventX(event);
 				var img_x = u.absX(this);
 				var img_w = this.offsetWidth;
 				if((img_w/2) + img_x > x) {
-						alert("fusk")
 					this.scene.showPrev();
 				}
 				else {
-						alert("fisk")
 					this.scene.showNext();
 				}
 			}
