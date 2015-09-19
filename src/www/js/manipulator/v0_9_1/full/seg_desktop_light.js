@@ -1,6 +1,6 @@
 /*
 Manipulator v0.9-full Copyright 2015 http://manipulator.parentnode.dk
-js-merged @ 2015-09-14 06:47:39
+js-merged @ 2015-09-19 07:24:30
 */
 
 /*seg_desktop_light_include.js*/
@@ -2729,6 +2729,11 @@ Util.Form = u.f = new function() {
 				iN.form.validationPassed();
 			}
 		}
+		else {
+			if(typeof(iN.form.validationFailed) == "function") {
+				iN.form.validationFailed(iN.form.errors);
+			}
+		}
 	}
 	this.validate = function(iN) {
 		if(!iN.form._validation) {
@@ -3250,10 +3255,10 @@ Util.actualHeight = u.actualH = function(node) {
 	return parseInt(u.gcs(node, "height"));
 }
 Util.eventX = function(event){
-	return (event.targetTouches ? event.targetTouches[0].pageX : event.pageX);
+	return (event.targetTouches && event.targetTouches.length ? event.targetTouches[0].pageX : event.pageX);
 }
 Util.eventY = function(event){
-	return (event.targetTouches ? event.targetTouches[0].pageY : event.pageY);
+	return (event.targetTouches && event.targetTouches.length ? event.targetTouches[0].pageY : event.pageY);
 }
 Util.browserWidth = u.browserW = function() {
 	return document.documentElement.clientWidth;
