@@ -1,6 +1,8 @@
 <?
 $IC = new Items();
-$collections = $IC->getItems(array("itemtype" => "photocollection", "status" => 1, "order" => "position"));
+$collections = $IC->getItems(array("itemtype" => "photocollection", "status" => 1, "order" => "position", "extend" => true));
+
+$navigation = $this->navigation("main");
 ?>
 	</div>
 
@@ -19,9 +21,17 @@ $collections = $IC->getItems(array("itemtype" => "photocollection", "status" => 
 				</ul>
 			</li>
 <?		foreach($collections as $collection):
-	 		$collection = $IC->extendItem($collection); ?>
+	 		//$collection = $IC->extendItem($collection);
+			 ?>
 			<li<?= $HTML->attribute("class", $collection["classname"]) ?>><a href="/photos/<?= $collection["sindex"] ?>"><?= $collection["name"] ?></a></li>
 <?		endforeach; ?>
+
+		<? if($navigation): ?>
+			<? foreach($navigation["nodes"] as $node): ?>
+			<?= $HTML->navigationLink($node); ?>
+			<? endforeach; ?>
+		<? endif; ?>
+
 		</ul>
 	</div>
 

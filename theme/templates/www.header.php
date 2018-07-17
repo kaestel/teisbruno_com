@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="<?= $this->language() ?>">
 <head>
-	<!-- (c) & (p) parentNode.dk 2009-2014 //-->
-	<!-- All material protected by copyrightlaws, as if you didnt know //-->
+	<!-- (c) & (p) parentNode.dk 2009-2018 //-->
 	<!-- If you want to help build the ultimate frontend-centered platform, visit parentnode.dk -->
 	<title><?= SITE_URL ?> - <?= $this->pageTitle() ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
