@@ -45,8 +45,25 @@ Util.Objects["page"] = new function() {
 			}
 
 
+			// iOS scroll fix 
+			page.fixiOSScroll = function() {
+
+				u.ass(this.hN, {
+					"position":"absolute",
+				});
+				u.ass(this.hN, {
+					"position":"fixed",
+				});
+
+			}
+
 			// global scroll handler 
 			page.scrolled = function() {
+
+				// Fix issue with fixed element after scroll
+				u.t.resetTimer(this.t_fix);
+				this.t_fix = u.t.setTimer(this, "fixiOSScroll", 200);
+
 
 				if(page.cN && page.cN.scene && typeof(page.cN.scene.scrolled) == "function") {
 					page.cN.scene.scrolled();
@@ -93,25 +110,25 @@ Util.Objects["page"] = new function() {
 
 					// set resize handler
 					if(u.e.event_pref != "touch") {
-						u.e.addEvent(window, "resize", page.resized);
+						u.e.addWindowEvent(this, "resize", this.resized);
 					}
 					// set scroll handler
-					u.e.addEvent(window, "scroll", page.scrolled);
+					u.e.addWindowEvent(this, "scroll", this.scrolled);
 					// set orientation change handler
-					u.e.addEvent(window, "orientationchange", page.orientationchanged);
+					u.e.addWindowEvent(this, "orientationchange", this.orientationchanged);
 
 
 					// create scene reference
-					page.cN.scene = u.qs(".scene", page);
+					this.cN.scene = u.qs(".scene", this);
 
 					// initialize header
-					page.initHeader();
+					this.initHeader();
 
 					// initialize navigation
-					page.initNavigation();
+					this.initNavigation();
 
 					// set content height
-					u.as(page.cN, "height", (page.offsetHeight - page.hN.offsetHeight)+"px");
+					u.as(this.cN, "height", (this.offsetHeight - this.hN.offsetHeight)+"px");
 
 					// enable ajax navigation
 					u.navigation();

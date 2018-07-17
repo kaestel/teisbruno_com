@@ -3,7 +3,7 @@ Util.Objects["front"] = new function() {
 		
 		// resize handler 
 		scene.resized = function() {
-			//u.bug("scene.resized:" + u.nodeId(this))
+			//u.bug("scene.resized:", this);
 
 //			u.as(this.cover, "height", page.offsetHeight+"px");
 
@@ -13,13 +13,13 @@ Util.Objects["front"] = new function() {
 
 		// scroll handler 
 		scene.scrolled = function() {
-			//u.bug("scene.scrolled:" + u.nodeId(this))
+			//u.bug("scene.scrolled:", this);
 
 		}
 
 		// GO GO!
 		scene.ready = function() {
-			u.bug("scene.ready:" + u.nodeId(this))
+			u.bug("scene.ready:", this);
 
 			// reverse ready state
 			page.cN.unready();

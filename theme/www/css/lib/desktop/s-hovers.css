@@ -4,3 +4,7 @@ a:hover {text-decoration: none;}
 #header .servicenavigation li.navigation:hover div {background-color: #b92fba;}
 
 #content .scene.photos ul.images li:hover {opacity: 1;}
+
+
+#content .scene.posts ul.articles li.article div.media p a:hover {color: #aaaaaa;}
+#content .scene.posts ul.articles li.article div.articlebody a:hover {text-decoration: none; color: #b92fba;}

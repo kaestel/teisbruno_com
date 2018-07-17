@@ -3,7 +3,7 @@ Util.Objects["photos"] = new function() {
 
 		// resize handler 
 		scene.resized = function() {
-			//u.bug("scene.resized:" + u.nodeId(this))
+			//u.bug("scene.resized:", this);
 
 			// set height of image mask
 			u.as(this.image_mask, "height", (this.offsetHeight - this.carousel.offsetHeight)+"px");
@@ -17,13 +17,13 @@ Util.Objects["photos"] = new function() {
 
 		// scroll handler 
 		scene.scrolled = function() {
-			//u.bug("scene.scrolled:" + u.nodeId(this))
+			//u.bug("scene.scrolled:", this);
 
 		}
 
 		// GO GO!
 		scene.ready = function() {
-			//u.bug("scene.ready:" + u.nodeId(this))
+			//u.bug("scene.ready:", this);
 
 			page.cN.scene = this;
 

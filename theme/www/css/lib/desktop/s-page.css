@@ -7,7 +7,7 @@
 }
 
 html {height: 100%;}
-body {height: 100%; background-color: #000000; /*background-color: #ffffff;*/ margin: 0;}
+body {height: 100%; background-color: #000000; margin: 0;}
 
 
 /* BASE */
@@ -29,12 +29,12 @@ a {text-decoration: underline; font-family: inherit;}
 
 
 h1 {font-size: 44px; padding-bottom: 30px;}
-h2 {font-size: 24px; padding-bottom: 7px; padding-top: 7px;}
+h2 {font-size: 32px; padding-bottom: 7px; padding-top: 7px;}
 h3 {font-size: 20px; padding-bottom: 4px; padding-top: 4px; line-height: 23px;}
 h4 {font-size: 13px;}
 h5 {}
 h6 {}
 
-p {font-size: 12px; line-height: 1.4em; padding: 0 0 20px;} 
+p {font-size: 14px; line-height: 1.4em; padding: 0 0 20px;} 
 
 #page {height: 100%; overflow: hidden;}

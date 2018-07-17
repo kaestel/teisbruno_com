@@ -4,3 +4,7 @@ a:active {text-decoration: none;}
 
 body.portrait {background: #000000 url(/img/logo_black_rotate.png) no-repeat center center;}
 body.portrait #page {display: none;}
+
+
+#content .scene.posts ul.articles li.article div.media p a:active {color: #aaaaaa;}
+#content .scene.posts ul.articles li.article div.articlebody a:active {text-decoration: none; color: #b92fba;}

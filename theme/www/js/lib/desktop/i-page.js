@@ -61,31 +61,31 @@ Util.Objects["page"] = new function() {
 	//			u.bug("page ready:" + page.is_ready)
 
 				// page is ready to be shown - only initalize if not already shown
-				if(!page.is_ready) {
+				if(!this.is_ready) {
 
 					// page is ready
-					page.is_ready = true;
+					this.is_ready = true;
 
 					// set scroll handler
-					u.e.addEvent(window, "scroll", page.scrolled);
+					u.e.addWindowEvent(this, "scroll", this.scrolled);
 
 					// set orientation change handler
 					if(u.e.event_pref == "touch") {
-						u.e.addEvent(window, "orientationchange", page.orientationchanged);
+						u.e.addWindowEvent(this, "orientationchange", this.orientationchanged);
 					}
 					// set resize handler
 					else {
-						u.e.addEvent(window, "resize", page.resized);
+						u.e.addWindowEvent(this, "resize", this.resized);
 					}
 
 					// create scene reference
-					page.cN.scene = u.qs(".scene", page);
+					this.cN.scene = u.qs(".scene", this);
 
 					// initialize navigation
-					page.initNavigation();
+					this.initNavigation();
 
 					// set navigation state
-					page.setNavigationState();
+					this.setNavigationState();
 
 					// enable ajax navigation
 					u.navigation();
@@ -155,6 +155,7 @@ Util.Objects["page"] = new function() {
 				this.response = function(response) {
 
 					var scene = u.qs(".scene", response);
+					u.sc(document.body, response.body_class);
 					u.ae(this, scene);
 					u.init(this);
 

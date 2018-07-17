@@ -6,19 +6,15 @@ global $itemtype;
 
 // get post tags for listing
 $categories = $IC->getTags(array("context" => $itemtype, "order" => "value"));
-$items = $IC->getItems(array("itemtype" => $itemtype, "status" => 1, "extend" => array("tags" => true, "user" => true, "readstate" => true)));
+$items = $IC->getItems(array("itemtype" => $itemtype, "status" => 1, "extend" => array("tags" => true, "user" => true, "mediae" => true)));
 
 ?>
 
-<div class="scene posts i:scene">
-	<h1>bLog</h1>
-	<p>
-		Tech stuff all over. It's not really a Blog. <br />
-		You'll figure it out, otherwise read the <a href="http://google.com/search?q=manual" target="_blank">manual</a>.
-	</p>
+<div class="scene posts i:blog">
 
+	<h1>Blog</h1>
 
-<? if($categories): ?>
+<? /*if($categories): ?>
 	<div class="categories">
 		<ul class="tags">
 			<li class="selected"><a href="/blog">All posts</a></li>
@@ -27,39 +23,34 @@ $items = $IC->getItems(array("itemtype" => $itemtype, "status" => 1, "extend" =>
 			<? endforeach; ?>
 		</ul>
 	</div>
-<? endif; ?>
+<? endif;*/ ?>
 
 
 <? if($items): ?>
-	<ul class="articles i:articleMiniList">
+	<ul class="articles">
 		<? foreach($items as $item):
 			$media = $IC->sliceMedia($item); ?>
-		<li class="item article id:<?= $item["item_id"] ?>" itemscope itemtype="http://schema.org/NewsArticle"
-			data-readstate="<?= $item["readstate"] ?>"
-			>
+		<li class="item article id:<?= $item["item_id"] ?>" itemscope itemtype="http://schema.org/BlogPosting">
 
 
 			<?= $HTML->articleTags($item, [
 				"context" => [$itemtype],
-				"url" => "/blog/tag",
-				"default" => ["/blog", "Posts"]
+				"url" => false
 			]) ?>
 
 
-			<h3 itemprop="headline"><a href="/blog/<?= $item["sindex"] ?>"><?= $item["name"] ?></a></h3>
+			<h2 itemprop="headline"><?= $item["name"] ?></h2>
 
 
-			<?= $HTML->articleInfo($item, "/blog/".$item["sindex"], [
+			<?= $HTML->articleInfo($item, "/blog", [
 				"media" => $media, 
 				"sharing" => true
 			]) ?>
 
 
-			<? if($item["description"]): ?>
-			<div class="description" itemprop="description">
-				<p><?= nl2br($item["description"]) ?></p>
+			<div class="articlebody" itemprop="articleBody">
+				<?= $item["html"] ?>
 			</div>
-			<? endif; ?>
 
 		</li>
 		<? endforeach; ?>
